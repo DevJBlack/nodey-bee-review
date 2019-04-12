@@ -17,6 +17,15 @@ class App extends Component {
       })
     })
   }
+
+  deleteFirst = ()=> {
+    axios.delete('/api/dummydata/0')
+    .then(res => {
+      this.setState({
+        names: res.data
+      })
+    })
+  }
   
   render() {
     console.log("APP DID RENDER")
@@ -27,6 +36,7 @@ class App extends Component {
         test={this.state.test}
         names={this.state.names}
       />
+      <button onClick={this.deleteFirst}>NOT SO SMALL NOW!</button>
 
       
       </>
