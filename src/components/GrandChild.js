@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 export default class GrandChild extends Component {
 
   state = {
-    name: "Brian"
+    name: "Brian",
+    targetIndex: 0
   }
 
   render() {
@@ -13,12 +14,12 @@ export default class GrandChild extends Component {
       <>
         THIS IS GrandChild
       {this.props.names.map((val, i, arr) => {
-          return (
-            <div>
-              <h1 key={i}>{val}</h1>
-              <button onClick={() => { this.props.replaceName(i, this.state.name) }}>Replace</button>
-            </div>
-          )
+          return  <h1 onClick={()=>{
+            this.setState({
+              targetIndex: i
+            })
+          }} key={i}>{val}</h1>
+
         })}
         <input onChange={(event) => {
           this.setState({
@@ -26,6 +27,9 @@ export default class GrandChild extends Component {
           })
           console.log("THIS IS EVENT.TARGET.VALUE: ", event.target.value)
         }} />
+        <button onClick={() => {
+          this.props.replaceName(this.state.targetIndex, this.state.name)
+        }}>JUST DO IT</button>
       </>
     )
   }
