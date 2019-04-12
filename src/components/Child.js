@@ -9,10 +9,11 @@ export default class Child extends Component{
     // console.log(this.props)
     return(
       <>
-      <GrandChild turtle={this.props.test}/>
-      {this.props.names.map((val, i, arr) => {
-        return (<h1 key={i}>{val}</h1>)
-      })}
+      <GrandChild 
+        names={this.props.names}
+        replaceName = {this.props.replaceName}
+      />
+      
       </>
     )
   }

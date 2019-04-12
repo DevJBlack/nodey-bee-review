@@ -16,6 +16,12 @@ app.delete('/api/dummydata/:index' , function(req , res){
  res.status(201).send(dummyData)
 })
 
+app.put('/api/dummydata/:index' , (req, res) => {
+let {index} = req.params
+dummyData.splice(index , 1 , req.body.name)
+res.status(200).send(dummyData)
+})
+
 
 
 app.listen(port, () => {

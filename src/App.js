@@ -13,7 +13,8 @@ class App extends Component {
     console.log("COMPONENT DID MOUNT")
     axios.get('/api/dummydata').then(res => {
       this.setState({
-        names: res.data
+        names: res.data,
+        newName: "David"
       })
     })
   }
@@ -26,15 +27,25 @@ class App extends Component {
       })
     })
   }
+
+  replaceName = (index , newName) => {
+    axios.put(`/api/dummydata/${index}` , {name: newName})
+    .then(res => {
+      this.setState({
+        names: res.data
+      })
+    })
+  }
   
   render() {
-    console.log("APP DID RENDER")
+    console.log(this.state.names)
     // console.log('THIS IS PROPS ON APP: ' , this.props)
     return (
       <>
       <Child 
         test={this.state.test}
         names={this.state.names}
+        replaceName={this.replaceName}
       />
       <button onClick={this.deleteFirst}>NOT SO SMALL NOW!</button>
 
