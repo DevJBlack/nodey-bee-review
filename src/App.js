@@ -1,26 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Child from './components/Child';
+import axios from 'axios'
 
 class App extends Component {
+
+  state = {
+    test: "test",
+    names: []
+  }
+
+  componentDidMount(){
+    console.log("COMPONENT DID MOUNT")
+    axios.get('/api/dummydata').then(res => {
+      this.setState({
+        names: res.data
+      })
+    })
+  }
+  
   render() {
+    console.log("APP DID RENDER")
+    // console.log('THIS IS PROPS ON APP: ' , this.props)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+      <Child 
+        test={this.state.test}
+        names={this.state.names}
+      />
+
+      
+      </>
     );
   }
 }
